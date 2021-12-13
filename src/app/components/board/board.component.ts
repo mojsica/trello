@@ -43,15 +43,14 @@ export class BoardComponent implements OnInit {
 
         this.styleService.setCurrentStyleColor(this.boardData.prefs.backgroundColor);
 
-        this.boardData.lists?.forEach((list: any) => {
+        this.boardData.lists?.forEach((list: List) => {
           list.cards = this.boardData.cards.filter((card: Card) => card.idList === list.id)
-          list.cards.idList = list.id; // TODO naci lepse resenje za ovo.
         });
       });
     });
   }
 
-  drop(event: CdkDragDrop<any>) {
+  drop(event: CdkDragDrop<Card[]>, list: List) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       const cardForUpdate = event.container.data[event.currentIndex];
@@ -65,7 +64,7 @@ export class BoardComponent implements OnInit {
         event.currentIndex,
       );
       const cardForUpdate = event.container.data[event.currentIndex];
-      cardForUpdate.idList = event.container.data.idList;
+      cardForUpdate.idList = list.id;
       cardForUpdate.pos = this.calculateElementPositionInArray(event.container.data, event.currentIndex);
       this.dataService.updateCard(cardForUpdate).subscribe((card: Card) => { });
     }

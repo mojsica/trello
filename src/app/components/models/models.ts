@@ -19,7 +19,7 @@ export interface ListCreate {
 export interface List extends ListCreate {
     id: string;
     closed: boolean;
-    cards?: Card[];
+    cards: Card[];
     addCardInputActive?: boolean;
 }
 export interface CardCreate {

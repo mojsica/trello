@@ -27,7 +27,7 @@
         <!-- List body -->
         <div cdkDropList
           [cdkDropListData]="list.cards"
-          (cdkDropListDropped)="drop($event)"
+          (cdkDropListDropped)="drop($event, list)"
         >
           <!-- Cards -->
           <div class="drag-drop-box card" *ngFor="let card of list.cards" cdkDrag>{{card.name}}</div>
