@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs';
 import { Board, BoardCreate, Card, CardCreate, List, ListCreate } from '../components/models/models';
 
 @Injectable()
@@ -19,7 +20,16 @@ export class DataService {
   public getBoard(id: string) {
     const url = `https://api.trello.com/1/boards/${id}/?lists=open&cards=open&key=${this.key}&token=${this.token}`;
     let options = { headers: new HttpHeaders({ 'Content-type': 'aplication/json' }) };
-    return this.http.get<Board>(url, options);
+    return this.http.get<Board>(url, options)
+      .pipe(
+        map(board => {
+          board.lists.forEach((list: List) => {
+            list.cards = board.cards.filter((card: Card) => card.idList === list.id)
+          });
+          return board;
+        }),
+      );
+
   }
 
   public updateBoardName(board: Board) {

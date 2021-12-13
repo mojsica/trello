@@ -17,7 +17,6 @@ export class BoardComponent implements OnInit {
   @ViewChild('inputListTitleField') inputListTitleField: ElementRef;
   @ViewChild('inputCardTitleField') inputCardTitleField: ElementRef;
 
-  boardData$: Observable<Board>;
   boardData: Board;
   cardTitleForSubmission = '';
   listTitleForSubmission = '';
@@ -28,24 +27,14 @@ export class BoardComponent implements OnInit {
     private styleService: StyleService,
     private activatedRoute: ActivatedRoute,
     private sidenavService: SidenavService
-  ) {
-    this.boardData$ = this.dataService.getBoard(this.activatedRoute.snapshot.params['id']);
-  }
+  ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
-      console.log('mojsa params  === id', params['id']);
-      this.boardData$ = this.dataService.getBoard(params['id']);
-      this.boardData$?.subscribe(data => {
-        console.log('Board-Complete === id', data);
-
+      this.dataService.getBoard(params['id']).subscribe(data => {     
+        console.log('Board complete', data);
         this.boardData = data;
-
         this.styleService.setCurrentStyleColor(this.boardData.prefs.backgroundColor);
-
-        this.boardData.lists?.forEach((list: List) => {
-          list.cards = this.boardData.cards.filter((card: Card) => card.idList === list.id)
-        });
       });
     });
   }
@@ -107,7 +96,7 @@ export class BoardComponent implements OnInit {
 
   onArchiveTheList(list: List) {
     this.dataService.archiveList(list).subscribe((data: List) => {
-      list.closed = data?.closed;
+      list.closed = data.closed;
       this.boardData.lists = this.boardData.lists.filter((list: List) => !list.closed); // Update list in data
     });
   }
