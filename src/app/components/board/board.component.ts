@@ -143,7 +143,7 @@ export class BoardComponent implements OnInit {
       const newList: any = {
         idBoard: this.boardData.id,
         name: this.listTitleForSubmission,
-        pos: (this.boardData.lists.length>0 ? (this.boardData.lists[this.boardData.lists.length - 1].pos + 1) : 1) // adding at the last possition
+        pos: (this.boardData.lists.length > 0 ? (this.boardData.lists[this.boardData.lists.length - 1].pos + 1) : 1) // adding at the last possition
       }
       this.listTitleForSubmission = '';
       this.dataService.createNewList(newList).subscribe((createdList: any) => {
