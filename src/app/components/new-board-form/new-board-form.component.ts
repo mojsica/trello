@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DataService } from '../../services/data.service';
-import { Board, BoardCreate } from '../board/boards';
+import { Board, BoardCreate } from '../models/boards';
 
 @Component({
   selector: 'app-new-board-form',

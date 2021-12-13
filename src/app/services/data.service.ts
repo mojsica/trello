@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Board, BoardCreate } from '../components/board/boards';
+import { Board, BoardCreate } from '../components/models/boards';
 
 @Injectable()
 export class DataService {

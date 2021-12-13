@@ -25,41 +25,40 @@
           </mat-menu>
         </div>
         <!-- List body -->
-        <div
-            cdkDropList
-            [cdkDropListData]="list.cards"
-            (cdkDropListDropped)="drop($event)">
-            
-            <!-- Cards -->
-            <div class="drag-drop-box card" *ngFor="let card of list.cards" cdkDrag>{{card.name}}</div>
+        <div cdkDropList
+          [cdkDropListData]="list.cards"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <!-- Cards -->
+          <div class="drag-drop-box card" *ngFor="let card of list.cards" cdkDrag>{{card.name}}</div>
 
-            <!-- Add card actions -->
-            <div class="card add-card-btn" fxLayoutAlign="start center" fxLayoutGap="4px" 
-              (click)="onAddCardInputActive(list)" 
-              *ngIf="!list.addCardInputActive"
-            >
-              <img src="assets/add-icon.svg" />
-              <div>Add a card</div>
-            </div>
-            <div class="add-card-input-wrapper" fxLayout="column" *ngIf="list.addCardInputActive">
-              <textarea 
-                #inputCardTitleField
-                class="add-card-input" 
-                type="text" 
-                placeholder="Enter a title for this card..."
-                [(ngModel)]="cardTitleForSubmission"
-              ></textarea>
-              <div fxLayout="row">
-                <div class="submit-card-title-btn" (click)="onSubmitCardName(list)">
-                  <span>
-                    Add card
-                  </span>
-                </div>
-                <div class="close-btn-wrapper" fxLayoutAlign="center center" (click)="list.addCardInputActive = false">
-                  <img class="close-btn" src="assets/close.svg" />
-                </div>
+          <!-- Add card actions -->
+          <div *ngIf="!list.addCardInputActive"
+            class="card add-card-btn" 
+            fxLayoutAlign="start center" 
+            fxLayoutGap="4px" 
+            (click)="onAddCardInputActive(list)" 
+          >
+            <img src="assets/add-icon.svg" />
+            <div>Add a card</div>
+          </div>
+          <div class="add-card-input-wrapper" fxLayout="column" *ngIf="list.addCardInputActive">
+            <textarea 
+              #inputCardTitleField
+              class="add-card-input" 
+              type="text" 
+              placeholder="Enter a title for this card..."
+              [(ngModel)]="cardTitleForSubmission"
+            ></textarea>
+            <div fxLayout="row">
+              <div class="submit-card-title-btn" (click)="onSubmitCardName(list)">
+                <span>Add card</span>
+              </div>
+              <div class="close-btn-wrapper" fxLayoutAlign="center center" (click)="list.addCardInputActive = false">
+                <img class="close-btn" src="assets/close.svg" />
               </div>
             </div>
+          </div>
 
         </div>
       </div>
@@ -84,9 +83,7 @@
           />
           <div fxLayout="row">
             <div class="submit-list-title-btn" (click)="onSubmitListName()">
-              <span>
-                Add list
-              </span>
+              <span>Add list</span>
             </div>
             <div class="close-btn-wrapper" fxLayoutAlign="center center" (click)="addNewListActive = false">
               <img class="close-btn" src="assets/close.svg" />

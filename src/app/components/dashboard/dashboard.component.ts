@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { StyleService } from 'src/app/services/style.service';
 import { DataService } from '../../services/data.service';
-import { Board } from '../board/boards';
+import { Board } from '../models/boards';
 import { NewBoardFormComponent } from '../new-board-form/new-board-form.component';
 
 @Component({
