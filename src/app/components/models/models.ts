@@ -31,7 +31,3 @@ export interface Card extends CardCreate {
     idBoard: string;
     pos: number
 }
-
-export interface IdList {
-    idList: string
-}
