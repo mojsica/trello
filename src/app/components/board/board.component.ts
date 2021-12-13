@@ -23,12 +23,12 @@ export class BoardComponent implements OnInit {
   addNewListActive = false;
 
   constructor(
-    private boardService: DataService,
+    private dataService: DataService,
     private styleService: StyleService,
     private activatedRoute: ActivatedRoute,
     private sidenavService: SidenavService
   ) {
-    this.boardData$ = this.boardService.getBoard(this.activatedRoute.snapshot.params['id']);
+    this.boardData$ = this.dataService.getBoard(this.activatedRoute.snapshot.params['id']);
   }
 
   ngOnInit(): void {
@@ -36,7 +36,7 @@ export class BoardComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((params: Params) => {
       console.log('mojsa params  === id', params['id']);
-      this.boardData$ = this.boardService.getBoard(params['id']);
+      this.boardData$ = this.dataService.getBoard(params['id']);
       this.boardData$?.subscribe(data => {
         console.log('Board-Complete === id', data);
 
@@ -57,7 +57,7 @@ export class BoardComponent implements OnInit {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       const cardForUpdate = event.container.data[event.currentIndex];
       cardForUpdate.pos = this.calculateElementPositionInArray(event.container.data, event.currentIndex);
-      this.boardService.updateCard(cardForUpdate).subscribe((data) => { console.log(data) });
+      this.dataService.updateCard(cardForUpdate).subscribe((data) => { console.log(data) });
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -68,7 +68,7 @@ export class BoardComponent implements OnInit {
       const cardForUpdate = event.container.data[event.currentIndex];
       cardForUpdate.idList = event.container.data.idList;
       cardForUpdate.pos = this.calculateElementPositionInArray(event.container.data, event.currentIndex);
-      this.boardService.updateCard(cardForUpdate).subscribe(data => { console.log(data) });
+      this.dataService.updateCard(cardForUpdate).subscribe(data => { console.log(data) });
     }
   }
 
@@ -92,22 +92,22 @@ export class BoardComponent implements OnInit {
   }
 
   onChangeBoardName() {
-    this.boardService.updateBoardName(this.boardData).subscribe(data => console.log(data));
+    this.dataService.updateBoardName(this.boardData).subscribe(data => console.log(data));
   }
 
   onChangeListName(list: any) {
-    this.boardService.updateListName(list).subscribe(data => console.log(data));
+    this.dataService.updateListName(list).subscribe(data => console.log(data));
   }
 
   onArchiveTheList(list: any) {
-    this.boardService.archiveList(list).subscribe((data: any) => {
+    this.dataService.archiveList(list).subscribe((data: any) => {
       list.closed = data?.closed;
       this.boardData.lists = this.boardData.lists.filter((list: any) => !list.closed);
     });
   }
 
   onArchiveAllCards(list: any) {
-    this.boardService.archiveAllCardsInList(list).subscribe(() => {
+    this.dataService.archiveAllCardsInList(list).subscribe(() => {
       list.cards = [];
     });
   }
@@ -130,7 +130,7 @@ export class BoardComponent implements OnInit {
         name: this.cardTitleForSubmission
       }
       this.cardTitleForSubmission = '';
-      this.boardService.createNewCard(newCard).subscribe((createdCard: any) => {
+      this.dataService.createNewCard(newCard).subscribe((createdCard: any) => {
         list.cards.push(createdCard);
         this.inputCardTitleField.nativeElement.focus(); // focus back on the input
       });
@@ -145,7 +145,7 @@ export class BoardComponent implements OnInit {
         pos: (this.boardData.lists.length>0 ? (this.boardData.lists[this.boardData.lists.length - 1].pos + 1) : 1) // adding at the last possition
       }
       this.listTitleForSubmission = '';
-      this.boardService.createNewList(newList).subscribe((createdList: any) => {
+      this.dataService.createNewList(newList).subscribe((createdList: any) => {
         createdList.cards = [];
         this.boardData.lists.push(createdList);
         this.inputListTitleField.nativeElement.focus(); // focus back on the input

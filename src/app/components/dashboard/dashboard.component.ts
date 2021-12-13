@@ -13,10 +13,10 @@ import { NewBoardFormComponent } from '../new-board-form/new-board-form.componen
 })
 export class DashboardComponent implements OnInit {
 
-  allBoards$ = this.boardService.getAllBoards();
+  allBoards$ = this.dataService.getAllBoards();
   constructor(
     private router: Router,
-    private boardService: DataService,
+    private dataService: DataService,
     private styleService: StyleService,
     private dialog: MatDialog
   ) { }
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((board: Board) => {
       if (board) {
-        this.allBoards$ = this.boardService.getAllBoards(); // Refreash the boards
+        this.allBoards$ = this.dataService.getAllBoards(); // Refreash the boards
 
         // resulting board, after the creation, does not have a property "shortLink"
         let shortLink = '';

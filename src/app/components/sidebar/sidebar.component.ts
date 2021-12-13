@@ -13,16 +13,16 @@ import { NewBoardFormComponent } from '../new-board-form/new-board-form.componen
 })
 export class SidebarComponent implements OnInit {
 
-  allBoards$ = this.boardService.getAllBoards();
+  allBoards$ = this.dataService.getAllBoards();
   constructor(
-    private boardService: DataService,
+    private dataService: DataService,
     private router: Router,
     private sidenavService: SidenavService,
     private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-    this.boardService.getAllBoards().subscribe((data) => {
+    this.dataService.getAllBoards().subscribe((data) => {
       console.log('Mojsa all boards', data);
     });
   }
@@ -36,9 +36,9 @@ export class SidebarComponent implements OnInit {
   }
 
   onDeleteBoard(board: Board) {
-    this.boardService.deleteBoard(board).subscribe((data: any) => {
+    this.dataService.deleteBoard(board).subscribe((data: any) => {
       console.log(data);
-      this.allBoards$ = this.boardService.getAllBoards(); // Refreash the boards
+      this.allBoards$ = this.dataService.getAllBoards(); // Refreash the boards
       this.router.navigate(['']);
     });
   }
@@ -53,7 +53,7 @@ export class SidebarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((board: Board) => {
       if (board) {
-        this.allBoards$ = this.boardService.getAllBoards(); // Refreash the boards
+        this.allBoards$ = this.dataService.getAllBoards(); // Refreash the boards
 
         // resulting board, after the creation, does not have a property "shortLink"
         let shortLink = '';
