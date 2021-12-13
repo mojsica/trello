@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { SidenavService } from 'src/app/services/sidenav.service';
 import { DataService } from '../../services/data.service';
-import { Board } from '../models/boards';
+import { Board } from '../models/models';
 import { NewBoardFormComponent } from '../new-board-form/new-board-form.component';
 
 @Component({

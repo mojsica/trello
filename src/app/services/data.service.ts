@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Board, BoardCreate } from '../components/models/boards';
+import { Board, BoardCreate } from '../components/models/models';
 
 @Injectable()
 export class DataService {
@@ -19,7 +19,7 @@ export class DataService {
   public getBoard(id: string) {
     const url = `https://api.trello.com/1/boards/${id}/?lists=open&cards=open&key=${this.key}&token=${this.token}`;
     let options = { headers: new HttpHeaders({ 'Content-type': 'aplication/json' }) };
-    return this.http.get<any>(url, options);
+    return this.http.get<Board>(url, options);
   }
 
   public updateBoardName(board: Board) {
