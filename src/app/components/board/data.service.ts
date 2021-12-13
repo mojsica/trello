@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Board, BoardCreate } from './boards';
 
 @Injectable()
-export class BoardService {
+export class DataService {
 
   key = '88d8ffd1ff7989bb66b0b85976b28395';
   token = '757f3f8d5079e0c1d0e553acb2fad9efe3ba4ddebd3e2a5280688b356dcc61aa';

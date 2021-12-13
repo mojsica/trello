@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
-import { BoardService } from './board.service';
+import { DataService } from './data.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { StyleService } from 'src/app/services/style.service';
 import { SidenavService } from 'src/app/services/sidenav.service';
@@ -23,7 +23,7 @@ export class BoardComponent implements OnInit {
   addNewListActive = false;
 
   constructor(
-    private boardService: BoardService,
+    private boardService: DataService,
     private styleService: StyleService,
     private activatedRoute: ActivatedRoute,
     private sidenavService: SidenavService

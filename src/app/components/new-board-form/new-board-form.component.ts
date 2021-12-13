@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { BoardService } from '../board/board.service';
+import { DataService } from '../board/data.service';
 import { Board, BoardCreate } from '../board/boards';
 
 @Component({
@@ -24,7 +24,7 @@ export class NewBoardFormComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<NewBoardFormComponent>,
-    private bordService: BoardService
+    private bordService: DataService
   ) { }
 
   ngOnInit(): void { }

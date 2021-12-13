@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { StyleService } from 'src/app/services/style.service';
-import { BoardService } from '../board/board.service';
+import { DataService } from '../board/data.service';
 import { Board } from '../board/boards';
 import { NewBoardFormComponent } from '../new-board-form/new-board-form.component';
 
@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   allBoards$ = this.boardService.getAllBoards();
   constructor(
     private router: Router,
-    private boardService: BoardService,
+    private boardService: DataService,
     private styleService: StyleService,
     private dialog: MatDialog
   ) { }

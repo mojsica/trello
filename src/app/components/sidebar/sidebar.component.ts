@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { SidenavService } from 'src/app/services/sidenav.service';
-import { BoardService } from '../board/board.service';
+import { DataService } from '../board/data.service';
 import { Board } from '../board/boards';
 import { NewBoardFormComponent } from '../new-board-form/new-board-form.component';
 
@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit {
 
   allBoards$ = this.boardService.getAllBoards();
   constructor(
-    private boardService: BoardService,
+    private boardService: DataService,
     private router: Router,
     private sidenavService: SidenavService,
     private dialog: MatDialog
