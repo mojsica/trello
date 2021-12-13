@@ -21,11 +21,7 @@ export class SidebarComponent implements OnInit {
     private dialog: MatDialog
   ) { }
 
-  ngOnInit(): void {
-    this.dataService.getAllBoards().subscribe((data) => {
-      console.log('Mojsa all boards', data);
-    });
-  }
+  ngOnInit(): void { }
 
   goToDashboard() {
     this.router.navigate(['']);
@@ -36,8 +32,7 @@ export class SidebarComponent implements OnInit {
   }
 
   onDeleteBoard(board: Board) {
-    this.dataService.deleteBoard(board).subscribe((data: any) => {
-      console.log(data);
+    this.dataService.deleteBoard(board).subscribe(() => {
       this.allBoards$ = this.dataService.getAllBoards(); // Refreash the boards
       this.router.navigate(['']);
     });

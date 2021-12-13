@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Board, BoardCreate } from '../components/models/models';
+import { Board, BoardCreate, Card, CardCreate, List, ListCreate } from '../components/models/models';
 
 @Injectable()
 export class DataService {
@@ -24,7 +24,7 @@ export class DataService {
 
   public updateBoardName(board: Board) {
     const url = `https://api.trello.com/1/boards/${board.id}/?&key=${this.key}&token=${this.token}`;
-    return this.http.put<Board[]>(url, { name: board.name });
+    return this.http.put<Board>(url, { name: board.name });
   }
 
   public deleteBoard(board: Board) {
@@ -37,49 +37,47 @@ export class DataService {
     return this.http.post<Board>(url, bordCreate);
   }
 
-  public createList(list: any) {
+  public getList(id: string) {
+    const url = `https://api.trello.com/1/lists/${id}/?cards=open&key=${this.key}&token=${this.token}`;
+    let options = { headers: new HttpHeaders({ 'Content-type': 'aplication/json' }) };
+    return this.http.get<List>(url, options);
+  }
+
+  public createList(list: ListCreate) {
     const url = `https://api.trello.com/1/lists?idBoard=${list.idBoard}&name=${list.name}&key=${this.key}&token=${this.token}`;
-    return this.http.post<any>(url, list);
+    return this.http.post<List>(url, list);
   }
 
-  public updateListName(list: any) {
+  public updateListName(list: List) {
     const url = `https://api.trello.com/1/lists/${list.id}/?&key=${this.key}&token=${this.token}`;
-    return this.http.put<any>(url, { name: list.name });
+    return this.http.put<List>(url, { name: list.name });
   }
 
-  public archiveList(list: any) {
+  public archiveList(list: List) {
     const url = `https://api.trello.com/1/lists/${list.id}/?&key=${this.key}&token=${this.token}`;
-    return this.http.put<any>(url, { closed: true });
+    return this.http.put<List>(url, { closed: true });
   }
 
-  public archiveAllCardsInList(list: any) {
+  public archiveAllCardsInList(list: List) {
     const url = `https://api.trello.com/1/lists/${list.id}/archiveAllCards/?&key=${this.key}&token=${this.token}`;
     let options = { headers: new HttpHeaders({ 'Content-type': 'aplication/json' }) };
-    return this.http.post<any>(url, options);
+    return this.http.post<List>(url, options);
   }
 
-  public createNewCard(card: any) {
+  public createNewCard(card: CardCreate) {
     const url = `https://api.trello.com/1/cards/?idList=${card.idList}/?&key=${this.key}&token=${this.token}`;
-    return this.http.post<any>(url, card);
+    return this.http.post<Card>(url, card);
   }
 
-  public updateCard(card: any) {
-    console.log('mojsa primer', card);
+  public updateCard(card: Card) {
     const url = `https://api.trello.com/1/cards/${card.id}/?&key=${this.key}&token=${this.token}`;
-    return this.http.put<any>(url, card);
+    return this.http.put<Card>(url, card);
   }
 
   /* Radi ne koristim ga*/
   public getCard(id: string) {
     const url = `https://api.trello.com/1/cards/${id}/?key=${this.key}&token=${this.token}`;
     let options = { headers: new HttpHeaders({ 'Content-type': 'aplication/json' }) };
-    return this.http.get<any>(url, options);
-  }
-
-  /* Radi ne koristim ga */
-  public getList(id: string) {
-    const url = `https://api.trello.com/1/lists/${id}/?cards=open&key=${this.key}&token=${this.token}`;
-    let options = { headers: new HttpHeaders({ 'Content-type': 'aplication/json' }) };
-    return this.http.get<any>(url, options);
+    return this.http.get<Card>(url, options);
   }
 }

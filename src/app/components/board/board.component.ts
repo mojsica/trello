@@ -5,6 +5,7 @@ import { DataService } from '../../services/data.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { StyleService } from 'src/app/services/style.service';
 import { SidenavService } from 'src/app/services/sidenav.service';
+import { Board, Card, CardCreate, List, ListCreate } from '../models/models';
 
 @Component({
   selector: 'app-board',
@@ -16,8 +17,8 @@ export class BoardComponent implements OnInit {
   @ViewChild('inputListTitleField') inputListTitleField: ElementRef;
   @ViewChild('inputCardTitleField') inputCardTitleField: ElementRef;
 
-  boardData$: Observable<any>;
-  boardData: any;
+  boardData$: Observable<Board>;
+  boardData: Board;
   cardTitleForSubmission = '';
   listTitleForSubmission = '';
   addNewListActive = false;
@@ -32,8 +33,6 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-
     this.activatedRoute.params.subscribe((params: Params) => {
       console.log('mojsa params  === id', params['id']);
       this.boardData$ = this.dataService.getBoard(params['id']);
@@ -44,9 +43,9 @@ export class BoardComponent implements OnInit {
 
         this.styleService.setCurrentStyleColor(this.boardData.prefs.backgroundColor);
 
-        this.boardData.lists.forEach((list: any) => {
-          list.cards = this.boardData.cards.filter((card: any) => card.idList === list.id)
-          list.cards.idList = list.id; // Proveriti zasto je ova linija ovde
+        this.boardData.lists?.forEach((list: any) => {
+          list.cards = this.boardData.cards.filter((card: Card) => card.idList === list.id)
+          list.cards.idList = list.id; // TODO naci lepse resenje za ovo.
         });
       });
     });
@@ -57,7 +56,7 @@ export class BoardComponent implements OnInit {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       const cardForUpdate = event.container.data[event.currentIndex];
       cardForUpdate.pos = this.calculateElementPositionInArray(event.container.data, event.currentIndex);
-      this.dataService.updateCard(cardForUpdate).subscribe((data) => { console.log(data) });
+      this.dataService.updateCard(cardForUpdate).subscribe((card: Card) => { });
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -68,11 +67,11 @@ export class BoardComponent implements OnInit {
       const cardForUpdate = event.container.data[event.currentIndex];
       cardForUpdate.idList = event.container.data.idList;
       cardForUpdate.pos = this.calculateElementPositionInArray(event.container.data, event.currentIndex);
-      this.dataService.updateCard(cardForUpdate).subscribe(data => { console.log(data) });
+      this.dataService.updateCard(cardForUpdate).subscribe((card: Card) => { });
     }
   }
 
-  calculateElementPositionInArray(array: any[], index: number) {
+  calculateElementPositionInArray(array: Card[], index: number) {
     let pos: number = array[index].pos;
     if (array.length > 1) {
       switch (index) {
@@ -92,29 +91,37 @@ export class BoardComponent implements OnInit {
   }
 
   onChangeBoardName() {
-    this.dataService.updateBoardName(this.boardData).subscribe(data => console.log(data));
+    if (this.boardData.name) {
+      this.dataService.updateBoardName(this.boardData).subscribe((data: Board) => { });
+    } else {
+      this.dataService.getBoard(this.boardData.id).subscribe((data: Board) => { this.boardData.name = data.name; });
+    }
   }
 
-  onChangeListName(list: any) {
-    this.dataService.updateListName(list).subscribe(data => console.log(data));
+  onChangeListName(list: List) {
+    if (list.name) {
+      this.dataService.updateListName(list).subscribe((data: List) => { });
+    } else {
+      this.dataService.getList(list.id).subscribe((data: List) => { list.name = data.name; });
+    }
   }
 
-  onArchiveTheList(list: any) {
-    this.dataService.archiveList(list).subscribe((data: any) => {
+  onArchiveTheList(list: List) {
+    this.dataService.archiveList(list).subscribe((data: List) => {
       list.closed = data?.closed;
-      this.boardData.lists = this.boardData.lists.filter((list: any) => !list.closed);
+      this.boardData.lists = this.boardData.lists.filter((list: List) => !list.closed); // Update list in data
     });
   }
 
-  onArchiveAllCards(list: any) {
-    this.dataService.archiveAllCardsInList(list).subscribe(() => {
+  onArchiveAllCards(list: List) {
+    this.dataService.archiveAllCardsInList(list).subscribe((data: List) => {
       list.cards = [];
     });
   }
 
-  onAddCardInputActive(list: any) {
+  onAddCardInputActive(list: List) {
     this.cardTitleForSubmission = ''; // Reset the value if it is changed in another open input
-    this.boardData.lists.forEach((list: any) => { list.addCardInputActive = false; }); // Close other open input if there is
+    this.boardData.lists.forEach((list: List) => { list.addCardInputActive = false; }); // Close other open input if there is
     list.addCardInputActive = true; // set active input
     setTimeout(() => { this.inputCardTitleField.nativeElement.focus(); }, 0); // focus on the input
   }
@@ -124,15 +131,15 @@ export class BoardComponent implements OnInit {
     setTimeout(() => { this.inputListTitleField.nativeElement.focus(); }, 0); // focus on the input
   }
 
-  onSubmitCardName(list: any) {
+  onSubmitCardName(list: List) {
     if (this.cardTitleForSubmission !== '') {
-      const newCard: any = {
+      const newCard: CardCreate = {
         idList: list.id,
         name: this.cardTitleForSubmission
       }
       this.cardTitleForSubmission = '';
-      this.dataService.createNewCard(newCard).subscribe((createdCard: any) => {
-        list.cards.push(createdCard);
+      this.dataService.createNewCard(newCard).subscribe((card: Card) => {
+        list.cards?.push(card);
         this.inputCardTitleField.nativeElement.focus(); // focus back on the input
       });
     }
@@ -140,13 +147,13 @@ export class BoardComponent implements OnInit {
 
   onSubmitListName() {
     if (this.listTitleForSubmission !== '') {
-      const newList: any = {
+      const newList: ListCreate = {
         idBoard: this.boardData.id,
         name: this.listTitleForSubmission,
         pos: (this.boardData.lists.length > 0 ? (this.boardData.lists[this.boardData.lists.length - 1].pos + 1) : 1) // adding at the last possition
       }
       this.listTitleForSubmission = '';
-      this.dataService.createList(newList).subscribe((createdList: any) => {
+      this.dataService.createList(newList).subscribe((createdList: List) => {
         createdList.cards = [];
         this.boardData.lists.push(createdList);
         this.inputListTitleField.nativeElement.focus(); // focus back on the input
