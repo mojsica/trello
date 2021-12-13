@@ -146,7 +146,7 @@ export class BoardComponent implements OnInit {
         pos: (this.boardData.lists.length > 0 ? (this.boardData.lists[this.boardData.lists.length - 1].pos + 1) : 1) // adding at the last possition
       }
       this.listTitleForSubmission = '';
-      this.dataService.createNewList(newList).subscribe((createdList: any) => {
+      this.dataService.createList(newList).subscribe((createdList: any) => {
         createdList.cards = [];
         this.boardData.lists.push(createdList);
         this.inputListTitleField.nativeElement.focus(); // focus back on the input

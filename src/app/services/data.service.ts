@@ -37,7 +37,7 @@ export class DataService {
     return this.http.post<Board>(url, bordCreate);
   }
 
-  public createNewList(list: any) {
+  public createList(list: any) {
     const url = `https://api.trello.com/1/lists?idBoard=${list.idBoard}&name=${list.name}&key=${this.key}&token=${this.token}`;
     return this.http.post<any>(url, list);
   }
