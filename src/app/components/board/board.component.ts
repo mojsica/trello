@@ -124,7 +124,7 @@ export class BoardComponent implements OnInit {
     setTimeout(() => { this.inputListTitleField.nativeElement.focus(); }, 0); // focus on the input
   }
 
-  onSubmitCardTitle(list: any) {
+  onSubmitCardName(list: any) {
     if (this.cardTitleForSubmission !== '') {
       const newCard: any = {
         idList: list.id,
@@ -138,7 +138,7 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  onSubmitListTitle() {
+  onSubmitListName() {
     if (this.listTitleForSubmission !== '') {
       const newList: any = {
         idBoard: this.boardData.id,

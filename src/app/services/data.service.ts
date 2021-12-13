@@ -42,7 +42,6 @@ export class DataService {
     return this.http.post<any>(url, list);
   }
 
-
   public updateListName(list: any) {
     const url = `https://api.trello.com/1/lists/${list.id}/?&key=${this.key}&token=${this.token}`;
     return this.http.put<any>(url, { name: list.name });
