@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
-import { DataService } from './data.service';
+import { DataService } from '../../services/data.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { StyleService } from 'src/app/services/style.service';
 import { SidenavService } from 'src/app/services/sidenav.service';

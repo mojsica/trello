@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { DataService } from '../board/data.service';
+import { DataService } from '../../services/data.service';
 import { Board, BoardCreate } from '../board/boards';
 
 @Component({
