@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DataService } from '../../services/data.service';
 import { Board, BoardCreate } from '../models/models';
@@ -8,7 +8,7 @@ import { Board, BoardCreate } from '../models/models';
   templateUrl: './new-board-form.component.html',
   styleUrls: ['./new-board-form.component.scss']
 })
-export class NewBoardFormComponent implements OnInit {
+export class NewBoardFormComponent {
   boardName = '';
   selectedColor = '#0079bf';
 
@@ -26,8 +26,6 @@ export class NewBoardFormComponent implements OnInit {
     public dialogRef: MatDialogRef<NewBoardFormComponent>,
     private bordService: DataService
   ) { }
-
-  ngOnInit(): void { }
 
   onCreateNewBoard() {
 

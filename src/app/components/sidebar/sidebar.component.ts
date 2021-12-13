@@ -11,7 +11,7 @@ import { NewBoardFormComponent } from '../new-board-form/new-board-form.componen
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
 
   allBoards$ = this.dataService.getAllBoards();
   constructor(
@@ -20,8 +20,6 @@ export class SidebarComponent implements OnInit {
     private sidenavService: SidenavService,
     private dialog: MatDialog
   ) { }
-
-  ngOnInit(): void { }
 
   goToDashboard() {
     this.router.navigate(['']);
