@@ -113,6 +113,7 @@ export class BoardComponent implements OnInit {
   }
 
   onAddCardInputActive(list: any) {
+    this.cardTitleForSubmission = ''; // Reset the value if it is changed in another open input
     this.boardData.lists.forEach((list: any) => { list.addCardInputActive = false; }); // Close other open input if there is
     list.addCardInputActive = true; // set active input
     setTimeout(() => { this.inputCardTitleField.nativeElement.focus(); }, 0); // focus on the input
