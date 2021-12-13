@@ -1,0 +1,130 @@
+.menu-icon-wrapper {
+    width: 32px;
+    height: 32px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.trello-logo-wrapper {
+    padding: 0 6px;
+    width: 75px;
+    height: 32px;
+    border-radius: 3px;
+    margin-top: 1px;
+}
+
+.menu-icon-wrapper:hover,
+.trello-logo-wrapper:hover {
+    opacity: 0.8;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.trello-logo {
+    background-image: url(https://a.trellocdn.com/prgb/dist/images/header-logo-spirit.d947df93bc055849898e.gif);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-position-x: center;
+    background-position-y: center;
+    width: 75px;
+    height: 15px;
+    padding: 8px 0;
+    margin: 0;
+    opacity: 1;
+}
+
+.trello-logo:hover {
+    background-image: url(https://a.trellocdn.com/prgb/dist/images/header-logo-spirit-loading.87e1af770a49ce8e84e3.gif);
+}
+
+mat-toolbar {
+    height: 42px;
+    padding-left: 4px;
+    padding-right: 4px;       
+}
+
+::ng-deep .mat-drawer-backdrop.mat-drawer-shown {
+    visibility: hidden!important;
+}
+
+mat-drawer-container {
+    background-color: white;
+}
+
+mat-drawer-container, mat-drawer-content, mat-drawer {
+    height: calc(100% - 21px);
+}
+
+mat-drawer{
+    width: 250px;
+}
+
+.router-outlet-wrapper {
+    height: 100%;
+}
+
+.sidebar-toggle-btn {
+    width: 5px;
+    display: flex;
+
+    margin: 0;
+    border-radius: 0;
+    border-right: 1px solid rgba(54, 58, 64, 0.24);
+    padding: 0;
+    box-sizing: border-box;
+    display: inline-flex;
+    border: none;
+    border-right: 1px solid rgba(54, 58, 64, 0.24);
+    cursor: pointer;
+    width: 15px;
+    text-decoration: none;
+    background-color: rgba(193, 199, 208, 0.2);
+    transition-property: background-color, border-color, box-shadow;
+    transition-duration: 85ms;
+    transition-timing-function: ease;
+    .sidenav-open-icon-wrapper {
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.2);
+        margin-top: 12px;
+        margin-left: 4px;
+        z-index: 10;
+        .sidenav-open-icon {
+            display: none;
+        }
+        .sidenav-open-icon-white {
+            display: block;
+        }
+    }
+    .sidenav-open-icon-wrapper:hover {
+        background-color: white;
+        .sidenav-open-icon {
+            display: block;
+        }
+        .sidenav-open-icon-white {
+            display: none;
+        }
+    }
+}
+
+.sidebar-toggle-btn:hover {
+    background-color: rgba(193, 199, 208, 0.5);
+    .sidenav-open-icon-wrapper {
+        background-color: white;
+        .sidenav-open-icon {
+            display: block;
+        }
+        .sidenav-open-icon-white {
+            display: none;
+        }
+    }
+}
+
+.is-dashboard-page {
+    background-color: white!important;
+    .sidenav-open-icon {
+        display: block!important;
+    }
+    .sidenav-open-icon-white {
+        display: none!important;
+    }
+}

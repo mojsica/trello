@@ -1,0 +1,56 @@
+<div fxLayout="row" class="title-row">
+    <div class="t-icon-wrapper">
+        <div class="t-icon">T</div>
+    </div>
+    <div fxLayout="column" class="sidebar-title-wrapper">
+        <p class="sidebar-title">Trello workspace</p>
+        <p class="sidebar-subtitle">Free</p>
+    </div>
+    <div class="close-sidebar-icon" 
+        fxLayoutAlign="center center"
+        (click)="onCloseSidenav()"
+        matTooltip="Expand sidebar"
+        [matTooltipPosition]="'below'"
+        matTooltipHideDelay="100"
+    >
+        <img src="assets/chevron-left.svg" />
+    </div>
+</div>
+
+<!-- Dashboard -->
+<div fxLayout="row" class="board-row push" 
+    [routerLink]="['']" 
+    [routerLinkActiveOptions]="{exact:true}"
+    [routerLinkActive]="'is-active'">
+    <img class="board-icon" src="assets/boards.svg" />
+    <div class="board-name">Boards</div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-between center" class="boards-list-title-wrapper">
+    <h2 class="boards-list-title">Your boards</h2>
+    <div fxLayoutAlign="center center" class="add-board-icon" (click)="onCreateBoard()">
+        <img src="assets/add-icon.svg" />
+    </div>
+</div>
+
+<!-- Boards -->
+<div *ngFor="let board of allBoards$ | async;"
+    fxLayout="row" fxLayoutAlign="space-between center"  
+    class="board-row"
+    [routerLinkActive]="'is-active'">
+    <div fxLayout="row" fxFlex="grow" [routerLink]="['/board', board.shortLink]">
+        <div class="color-cloud" [ngStyle]="{'background-color': board.prefs.backgroundColor}"></div>
+        <div class="board-name">{{ board.name }}</div>
+    </div>
+    <div class="delete-icon-wrapper" fxLayoutAlign="center center" [matMenuTriggerFor]="menu">
+        <img class="delete-icon" src="assets/three-dots.svg" />
+    </div>
+
+    <!-- Menu actions on a board -->
+    <mat-menu #menu="matMenu" class="list-action-menu">
+        <div class="title-wrapper">
+            <div class="title">Board actions:</div>
+        </div>
+        <button mat-menu-item (click)="onDeleteBoard(board)">Delete board</button>
+    </mat-menu>
+</div>

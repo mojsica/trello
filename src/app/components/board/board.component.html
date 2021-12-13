@@ -1,0 +1,100 @@
+<div class="board-container" [ngStyle]="{'left' : sidenavState ? '0px' : '15px' }">
+  <!-- Board name -->
+  <div class="action-bar" fxLayoutAlign="start center" *ngIf="boardData">
+    <input class="board-name-input" type="text" [(ngModel)]="boardData.name" (ngModelChange)="onChangeBoardName()"/>
+  </div>
+
+  <div fxLayout="wrap" fxLayoutAlign="start">
+    <div cdkDropListGroup style="margin-left: 8px;">
+      <!-- Lists -->
+      <div class="drag-drop-container list" *ngFor="let list of boardData?.lists">
+        <!-- List header -->
+        <div class="list-header" fxLayout="row" fxLayoutAlign="start center">
+          <input class="list-name-input" type="text" [(ngModel)]="list.name" (ngModelChange)="onChangeListName(list)"/>
+          <div class="three-dots-icon-wrapper" fxLayoutAlign="center center" [matMenuTriggerFor]="menu">
+            <img class="three-dots-icon" src="assets/three-dots.svg" />
+          </div>
+          <!-- Menu actions on list -->
+          <mat-menu #menu="matMenu" class="list-action-menu">
+            <div class="title-wrapper">
+              <div class="title">List actions:</div>
+            </div>
+            <button mat-menu-item (click)="onAddCardInputActive(list)">Add card</button>
+            <button mat-menu-item (click)="onArchiveAllCards(list)">Archive all cards in the list</button>
+            <button mat-menu-item (click)="onArchiveTheList(list)">Archive the list</button>
+          </mat-menu>
+        </div>
+        <!-- List body -->
+        <div
+            cdkDropList
+            [cdkDropListData]="list.cards"
+            (cdkDropListDropped)="drop($event)">
+            
+            <!-- Cards -->
+            <div class="drag-drop-box card" *ngFor="let card of list.cards" cdkDrag>{{card.name}}</div>
+
+            <!-- Add card actions -->
+            <div class="card add-card-btn" fxLayoutAlign="start center" fxLayoutGap="4px" 
+              (click)="onAddCardInputActive(list)" 
+              *ngIf="!list.addCardInputActive"
+            >
+              <img src="assets/add-icon.svg" />
+              <div>Add a card</div>
+            </div>
+            <div class="add-card-input-wrapper" fxLayout="column" *ngIf="list.addCardInputActive">
+              <textarea 
+                #inputCardTitleField
+                class="add-card-input" 
+                type="text" 
+                placeholder="Enter a title for this card..."
+                [(ngModel)]="cardTitleForSubmission"
+              ></textarea>
+              <div fxLayout="row">
+                <div class="submit-card-title-btn" (click)="onSubmitCardTitle(list)">
+                  <span>
+                    Add card
+                  </span>
+                </div>
+                <div class="close-btn-wrapper" fxLayoutAlign="center center" (click)="list.addCardInputActive = false">
+                  <img class="close-btn" src="assets/close.svg" />
+                </div>
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Add new list -->
+    <div>
+      <div class="add-btn-wrapper" (click)="onAddListInputActive()" *ngIf="!addNewListActive">
+        <div class="add-btn" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+          <img src="assets/add-icon-white.svg" />
+          <div>Add another list</div>
+        </div>
+      </div>
+      <div class="add-list-input-container" *ngIf="addNewListActive">
+        <div class="add-list-input-wrapper" fxLayout="column">
+          <input 
+            #inputListTitleField
+            class="add-list-input" 
+            type="text" 
+            placeholder="Enter list title"
+            [(ngModel)]="listTitleForSubmission"
+          />
+          <div fxLayout="row">
+            <div class="submit-list-title-btn" (click)="onSubmitListTitle()">
+              <span>
+                Add list
+              </span>
+            </div>
+            <div class="close-btn-wrapper" fxLayoutAlign="center center" (click)="addNewListActive = false">
+              <img class="close-btn" src="assets/close.svg" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pad"></div>
+  </div>
+</div>

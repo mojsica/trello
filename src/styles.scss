@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    height: 100%;
+    overflow: hidden;
+}
+.pad {
+    padding: 8px;
+}
+
+/* mat-dialog adjustments */
+.mat-dialog-container {
+  background-color: transparent!important;
+  box-shadow: none;
+}
+.cdk-overlay-dark-backdrop {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+/* mat-menu adjustments */
+.list-action-menu {
+    width: 304px;
+    .title-wrapper {
+      padding: 0px 8px;
+      .title {
+        text-align: center;
+        padding: 8px;
+        border-bottom: 1px solid #091e4221;
+        margin-bottom: 8px;
+        color: rgb(94, 108, 132);
+      }
+    }
+    button.mat-menu-item  {
+      color: rgb(94, 108, 132);
+      height: 32px;
+      flex-direction: column;
+      justify-content: center;
+    }
+}

@@ -1,0 +1,26 @@
+<div class="upper-half">
+    <div fxLayout="row" fxLayoutAlign="center center" class="title-row">
+        <div class="t-icon-wrapper">
+            <div class="t-icon">T</div>
+        </div>
+        <div fxLayout="column" class="title-wrapper">
+            <p class="dashboard-title">Trello workspace</p>
+            <p class="dashboard-subtitle">Boards</p>
+        </div>
+    </div>
+</div>
+<div class="lower-half">
+    <div class="boards" fxLayout="row wrap" fxLayoutAlign="center center">
+        <div class="create-board" (click)=onCreateBoard()>
+            <div class="color-create-board" fxLayoutAlign="center center">
+                <div class="create-board-name">Create new board</div>
+            </div>
+        </div>
+        <div class="board" *ngFor="let board of allBoards$ | async;" [routerLink]="['/board', board.shortLink]">
+            <div class="color-cloud" [ngStyle]="{'background-color': board.prefs.backgroundColor}">
+                <div class="fade"></div>
+                <div class="board-name">{{ board.name }}</div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<!-- toolbar -->
+<div [ngStyle]="{'background-color': curentStyleColor}">
+    <mat-toolbar color="primary" [ngStyle]="{'background' : curentStyleColor ? 'rgba(0, 0, 0, 0.45)' : '#026AA7' }">
+        <div class="menu-icon-wrapper" 
+            fxLayoutAlign="center center" 
+            [routerLink]="['']"
+            matTooltip="Go to boards"
+            matTooltipHideDelay="100"
+        >
+            <img src="assets/menu-icon.svg" />
+        </div>
+        <div class="trello-logo-wrapper">
+            <div class="trello-logo"></div>
+        </div>
+    </mat-toolbar>
+</div>
+
+<mat-drawer-container class="example-container" [hasBackdrop]="" [ngStyle]="{'background-color': curentStyleColor}">
+    <mat-drawer [opened]="sidenavState" mode="push">
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div fxLayout="row" class="router-outlet-wrapper">
+            <!-- sidenav button -->
+            <button 
+                *ngIf="!sidenavState"
+                (click)="onToggleSidenav()" 
+                class="sidebar-toggle-btn"
+            >
+                <div class="sidenav-open-icon-wrapper" 
+                    fxLayoutAlign="center center" 
+                    [ngClass]="{'is-dashboard-page': router.url=='/'}"
+                    matTooltip="Expand sidebar"
+                    [matTooltipPosition]="'below'"
+                    matTooltipHideDelay="100"
+                >
+                    <img class="sidenav-open-icon" src="assets/sidenav-open.svg" />
+                    <img class="sidenav-open-icon-white" src="assets/sidenav-open-white.svg" />
+                </div>
+            </button>
+
+            <!-- router-outlet -->
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>

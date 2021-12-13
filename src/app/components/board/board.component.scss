@@ -1,0 +1,285 @@
+.drag-drop-container {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.drag-drop-box {
+  padding: 20px 10px;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.drag-drop-box:last-child {
+  border: none;
+}
+
+.drag-drop-list.cdk-drop-list-dragging .drag-drop-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.board-container {
+  bottom: 0;
+  margin-bottom: 8px;
+  overflow: auto;
+  padding-bottom: 8px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  -webkit-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+  .action-bar {
+    height: 52px;
+    margin-bottom: 8px;
+    padding-left: 4px;
+    .board-name-input {
+      border-radius: 3px;
+      margin-left: 15px;
+      background-color: #ffffff3d;;
+      height: 32px;
+      width: 150px;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 32px;
+      border: 0;
+      text-align: center;
+      cursor: pointer;
+    }
+    .board-name-input:hover {
+      background-color: #ffffff52;
+    }
+    .board-name-input:focus {
+      background: white;
+      color: black;
+      outline: none;
+      text-align: center;
+      cursor: auto;
+    }
+  }
+
+  .list {
+    background-color: #ebecf0;
+    border-radius: 3px;
+    box-sizing: border-box;
+    max-height: 100%;
+    position: relative;
+    white-space: normal;
+    margin: 0 4px;    
+    width: 272px;
+    padding: 8px;
+    .list-header {
+      height: 38px;
+      position: relative;
+      padding-bottom: 8px;
+      .list-name-input {
+        height: 28px;
+        width: 228px;
+        padding-left: 8px;
+        border-radius: 3px;
+        background-color: transparent;
+        color: rgb(23, 43, 77);
+        font-size: 13px;
+        font-weight: 600;
+        border: 0;
+        cursor: pointer;
+      }
+      .list-name-input:focus {
+        background: white;
+        outline-color: #026AA7;
+        cursor: auto;
+      }
+      .three-dots-icon-wrapper {
+        cursor: pointer;
+        height: 32px;
+        width: 32px;
+        .three-dots-icon {
+          color: red;
+          height: 16px;
+          width: 16px;
+        }
+      }
+      .three-dots-icon-wrapper:hover {
+        border-radius: 3px;
+        background-color: #091e4214;
+      }
+    }
+    .card {
+      padding: 6px 8px 2px;
+      margin-bottom: 8px;
+      background-color: #fff;
+      border-radius: 3px;
+      box-shadow: 0 1px 0 #091e4240;
+      cursor: pointer;
+      display: block;
+      position: relative;
+      text-decoration: none;
+      z-index: 0;
+      min-height: 24px;
+      line-height: 24px;
+    }
+    .add-card-btn {
+      background-color: transparent;
+      box-shadow: none;
+      color: #5E6C84;
+      padding: 4px 8px 4px;
+      margin-bottom: 0px;
+      img {
+        height: 16px;
+        width: 16px;
+        line-height: 16px;
+      }
+    }
+    .add-card-btn:hover {
+      background-color: #091e4214!important;
+    }
+    
+    .add-card-input-wrapper {
+      .add-card-input {
+        border: 0;
+        height: 58px;
+        padding: 6px 8px 2px;
+        margin-bottom: 8px;
+        background-color: #fff;
+        border-radius: 3px;
+        box-shadow: 0 1px 0 #091e4240;
+        font-family: 'Roboto';
+        resize: none;
+      }
+      .add-card-input:focus {
+        outline: none;
+      }
+      .submit-card-title-btn {
+        width: 80px;
+        height: 32px;
+        background-color: #0079bf;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 3px;
+        cursor: pointer;
+        span {
+          padding-top: 2px;
+        }
+      }
+      .submit-card-title-btn:hover {
+        background-color: #026aa7;
+      }
+      .close-btn-wrapper {
+        margin-left: 8px;
+        width: 32px;
+        border-radius: 3px;
+        cursor: pointer;
+        .close-btn {
+          width: 16px;
+        }
+      }
+      .close-btn-wrapper:hover {
+        background-color: #091e4214 ;
+      }
+    }
+  }
+
+  .add-btn-wrapper {
+    margin: 0 4px;    
+    padding: 8px;
+    background-color: #ffffff3d;
+    cursor: pointer;
+    border-radius: 3px;
+    height: 24px;
+    color: white;
+    .add-btn {
+      width: 266px;
+      height: 20px;
+      padding-top: 4px;
+      div {
+        padding-top: 2px;
+      }
+    }
+  }
+  .add-btn-wrapper:hover{
+    background-color: #ffffff52;
+  }
+  .add-list-input-container {
+    background-color: #ebecf0;
+    border-radius: 3px;
+    height: 76px;
+    position: relative;
+    white-space: normal;
+    margin: 0 4px;    
+    padding: 8px;
+    .add-list-input-wrapper {
+      width: 266px;
+      .add-list-input {
+        border: 0;
+        height: 36px;
+        padding-left: 8px;
+        margin-bottom: 8px;
+        background-color: #fff;
+        border-radius: 3px;
+        box-shadow: 0 1px 0 #091e4240;
+        font-family: 'Roboto';
+        font-size: 14px;
+        resize: none;
+      }
+      .add-list-input:focus {
+        background: white;
+        outline-color: #026AA7;
+        cursor: auto;
+      }
+      .submit-list-title-btn {
+        width: 80px;
+        height: 32px;
+        background-color: #0079bf;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 3px;
+        cursor: pointer;
+        span {
+          padding-top: 2px;
+        }
+      }
+      .submit-list-title-btn:hover {
+        background-color: #026aa7;
+      }
+      .close-btn-wrapper {
+        margin-left: 8px;
+        width: 32px;
+        border-radius: 3px;
+        cursor: pointer;
+        .close-btn {
+          width: 16px;
+        }
+      }
+      .close-btn-wrapper:hover {
+        background-color: #091e4214 ;
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+<div>
+    <div class="fields-row" fxLayout="row">
+        <div class="name-input-cloud" [ngStyle]="{'background':selectedColor}">
+            <div class="input-wrapper">
+                <input class="name-input" placeholder="Add board title..." type="text" [(ngModel)]="boardName"/>
+            </div>
+        </div>
+        <div class="color-select-group" fxLayout="column">
+            <div class="color-select-row" fxLayout="row">
+                <div class="color-select" [ngStyle]="{'background':color11}" (click)="onColorSelected(color11)"><img *ngIf="selectedColor===color11" class="delete-icon" src="assets/checkbox.svg" /></div>
+                <div class="color-select" [ngStyle]="{'background':color12}" (click)="onColorSelected(color12)"><img *ngIf="selectedColor===color12" class="delete-icon" src="assets/checkbox.svg" /></div>
+                <div class="color-select" [ngStyle]="{'background':color13}" (click)="onColorSelected(color13)"><img *ngIf="selectedColor===color13" class="delete-icon" src="assets/checkbox.svg" /></div>
+            </div>
+            <div class="color-select-row" fxLayout="row">
+                <div class="color-select" [ngStyle]="{'background':color21}" (click)="onColorSelected(color21)"><img *ngIf="selectedColor===color21" class="delete-icon" src="assets/checkbox.svg" /></div>
+                <div class="color-select" [ngStyle]="{'background':color22}" (click)="onColorSelected(color22)"><img *ngIf="selectedColor===color22" class="delete-icon" src="assets/checkbox.svg" /></div>
+                <div class="color-select" [ngStyle]="{'background':color23}" (click)="onColorSelected(color23)"><img *ngIf="selectedColor===color23" class="delete-icon" src="assets/checkbox.svg" /></div>
+            </div>
+            <div class="color-select-row" fxLayout="row">
+                <div class="color-select" [ngStyle]="{'background':color31}" (click)="onColorSelected(color31)"><img *ngIf="selectedColor===color31" class="delete-icon" src="assets/checkbox.svg" /></div>
+                <div class="color-select" [ngStyle]="{'background':color32}" (click)="onColorSelected(color32)"><img *ngIf="selectedColor===color32" class="delete-icon" src="assets/checkbox.svg" /></div>
+                <div class="color-select" [ngStyle]="{'background':color33}" (click)="onColorSelected(color33)"><img *ngIf="selectedColor===color33" class="delete-icon" src="assets/checkbox.svg" /></div>
+            </div>
+        </div>
+    </div>
+    <div class="submit-btn" [ngClass]="{'disabled':!boardName}" (click)="onCreateNewBoard()">
+        <span>Create board</span>
+    </div>
+</div>
