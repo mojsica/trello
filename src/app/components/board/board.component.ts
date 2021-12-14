@@ -1,11 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { DataService } from '../../services/data.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { StyleService } from 'src/app/services/style.service';
 import { SidenavService } from 'src/app/services/sidenav.service';
 import { Board, Card, CardCreate, List, ListCreate } from '../models/models';
+import { MatDialog } from '@angular/material/dialog';
+import { CardDetailsComponent } from '../card-details/card-details.component';
 
 @Component({
   selector: 'app-board',
@@ -26,16 +28,43 @@ export class BoardComponent implements OnInit {
     private dataService: DataService,
     private styleService: StyleService,
     private activatedRoute: ActivatedRoute,
-    private sidenavService: SidenavService
+    private route: Router,
+    private sidenavService: SidenavService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => {
-      this.dataService.getBoard(params['id']).subscribe(data => {     
-        console.log('Board complete', data);
-        this.boardData = data;
-        this.styleService.setCurrentStyleColor(this.boardData.prefs.backgroundColor);
-      });
+      
+      // Board
+      if (params['id']) {
+        this.dataService.getBoard(params['id']).subscribe(data => {     
+          this.boardData = data;
+          this.styleService.setCurrentStyleColor(this.boardData.prefs.backgroundColor);
+        });
+      }
+
+      // Goint to card - openning the modal
+      if (params['idBoard'] && params['idCard']) { 
+        this.dataService.getBoard(params['idBoard']).subscribe(data => {
+          this.boardData = data;
+          this.styleService.setCurrentStyleColor(this.boardData.prefs.backgroundColor);
+
+          const dialogRef = this.dialog.open(CardDetailsComponent, {
+            width: '812px',
+            data: { 
+              id: params['idCard'] 
+            },
+            position: {
+              top: '25px',
+            }
+          });
+          dialogRef.afterClosed().subscribe(() => { 
+            this.route.navigate(['/board', this.boardData.id]);
+          });
+        });
+      }
+      
     });
   }
 

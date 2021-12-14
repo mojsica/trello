@@ -29,5 +29,22 @@ export interface CardCreate {
 export interface Card extends CardCreate {
     id: string;
     idBoard: string;
-    pos: number
+    pos: number;
+    shortLink: string;
+}
+
+export interface ActionOnCard {
+    appCreator: null;
+    data: { 
+        text: string; 
+        board: { id: string, name: string, shortLink: string }
+        card: { id: string, name: string, idShort: number, shortLink: string }
+        list: { id: string, name: string }
+    };
+    date: string;
+    id: string;
+    idMemberCreator: string;
+    limits: any;
+    memberCreator: any;
+    type: string;
 }

@@ -1,0 +1,87 @@
+.comment {
+    margin-bottom: 12px;
+    .comment-input-wrapper {
+        cursor: auto;
+        color: #172b4d;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        background-color: white;
+        box-shadow: 0 1px 2px -1px #091e4240, 0 0 0 1px #091e4214;
+        padding: 8px 12px;
+        .comment-input {
+            font-family: Roboto, "Helvetica Neue", sans-serif;
+            color: #172b4d;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            border: none;
+            padding: 0;
+            resize: none;
+            width: 100%;
+        }
+        .comment-input:focus {
+            outline: none;
+        }
+        .save-comment {
+            width: 80px;
+            height: 32px;
+            background-color: #0079bf;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 3px;
+            cursor: pointer;
+            span {
+                padding-top: 2px;
+            }
+        }
+        .save-comment:hover {
+            background-color: #026aa7;
+        }
+        .save-comment.disabled {
+            background-color: #F4F5F7;
+            color: #a5adba;
+            cursor: not-allowed;
+        }
+        .close-btn-wrapper {
+            margin-left: 8px;
+            width: 32px;
+            border-radius: 3px;
+            cursor: pointer;
+            .close-btn {
+            width: 16px;
+            }
+        }
+        .close-btn-wrapper:hover {
+            background-color: #091e4214 ;
+        }
+        
+    }
+    .comment-box {
+        cursor: auto;
+        padding: 8px 12px;
+        color: #172b4d;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        background-color: white;
+        box-shadow: 0 1px 2px -1px #091e4240, 0 0 0 1px #091e4214;
+        /* box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%); */
+    }
+    .action-on-comment {
+        padding: 0px 4px;
+        .action-label {
+            color: #5e6c84;
+            line-height: 24px;
+            font-size: 12px;
+            cursor: pointer;
+            text-decoration: underline;
+            padding: 0px 2px;
+        }
+        .dash {
+            text-decoration: none;
+        }
+    }
+}

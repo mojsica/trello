@@ -1,0 +1,75 @@
+.card-details {
+    background-color: #f4f5f7; 
+    width: 100%; 
+    min-height: 600px;
+    .header {
+        min-height: 32px;
+        background-color: #ebecf0;
+        border-radius: 3px;
+        box-sizing: border-box;
+        max-height: 100%;
+        position: relative;
+        white-space: normal;
+        margin: 0 4px;    
+        padding: 24px 8px 24px 8px;
+        .card-icon {
+            color: #5e6c84;
+            padding-bottom: 10px;
+            padding-right: 8px;
+        }
+        .card-name-input-container {
+            height: 38px;
+            position: relative;
+            padding-bottom: 8px;
+            .card-name-input {
+                height: 26px;
+                width: 656px;
+                padding: 4px 8px;
+                border-radius: 3px;
+                background-color: transparent;
+                color: #5e6c84;
+                font-size: 20px;
+                font-weight: 600;
+                border: 0;
+                cursor: pointer;
+            }
+            .card-name-input:focus {
+            background: white;
+            outline-color: #026AA7;
+            cursor: auto;
+            }
+        }
+    }
+    .card-details-body {
+        padding: 12px;
+        .card-details-side-container {
+            padding: 12px;
+            .archive-btn {
+                background-color: #091e420a;
+                border-radius: 3px;
+                cursor: pointer;
+                text-decoration: none;
+                min-height: 24px;
+                line-height: 24px;
+                box-shadow: none;
+                color: #5E6C84;
+                padding: 4px 8px 4px;
+                margin-bottom: 0px;
+                .archive-btn-icon {
+                    padding-left: 8px;
+                    padding-right: 8px;
+                }
+            }
+            .archive-btn:hover {
+                background-color: #091e4214!important;
+            }
+        }
+        .card-details-main-container {
+            padding: 12px;
+            .new-comment-wrapper {
+                padding-bottom: 24px;
+            }
+        }
+
+    }
+}

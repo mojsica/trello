@@ -30,7 +30,9 @@
           (cdkDropListDropped)="drop($event, list)"
         >
           <!-- Cards -->
-          <div class="drag-drop-box card" *ngFor="let card of list.cards" cdkDrag>{{card.name}}</div>
+          <div *ngFor="let card of list.cards" cdkDrag>
+            <app-card [card]="card"></app-card>
+          </div>
 
           <!-- Add card actions -->
           <div *ngIf="!list.addCardInputActive"

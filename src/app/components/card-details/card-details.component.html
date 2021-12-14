@@ -1,0 +1,38 @@
+<div class="card-details">
+    <!-- Card name -->
+    <div class="header" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon aria-hidden="false" aria-label="Card" class="card-icon">list</mat-icon>
+        <div class="card-name-input-container" *ngIf="card">
+            <input class="card-name-input" type="text" [(ngModel)]="card.name" (ngModelChange)="onChangeCardName()"/>
+        </div>
+    </div>
+    <div class="card-details-body" fxLayout="row">
+        <!-- main container -->
+        <div class="card-details-main-container" fxFlex="70">
+            <div class="new-comment-wrapper" *ngIf="card">
+                <app-comment 
+                    [idCard]="card.shortLink"
+                    (addAction)="onAddComment($event)"
+                ></app-comment>
+            </div>
+            <div *ngFor="let action of actionsOnCard">
+                <app-comment 
+                    [action]="action"
+                    (deleteAction)="onDeleteComment($event)" 
+                ></app-comment>
+            </div>
+
+        </div>
+        <!-- side container -->
+        <div class="card-details-side-container" fxFlex="30">
+            <div
+                class="card archive-btn" 
+                fxLayoutAlign="start center" 
+                (click)="onArchiveCard()" 
+            >
+                <mat-icon class="archive-btn-icon">movie</mat-icon>
+                <div>Archive</div>
+            </div>
+        </div>
+    </div>
+</div>

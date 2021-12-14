@@ -15,6 +15,8 @@ import { StyleService } from './services/style.service';
 import { SidenavService } from './services/sidenav.service';
 import { FormsModule } from '@angular/forms';
 import { NewBoardFormComponent } from './components/new-board-form/new-board-form.component';
+import { CardDetailsComponent } from './components/card-details/card-details.component';
+import { CommentComponent } from './components/comment/comment.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,9 @@ import { NewBoardFormComponent } from './components/new-board-form/new-board-for
     CardComponent,
     SidebarComponent,
     DashboardComponent,
-    NewBoardFormComponent
+    NewBoardFormComponent,
+    CardDetailsComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

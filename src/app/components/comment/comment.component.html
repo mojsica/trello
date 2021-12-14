@@ -1,0 +1,31 @@
+<div class="comment">
+    <!-- Edit comment -->
+    <div class="comment-input-wrapper" *ngIf="commentEdit || idCard">
+        <textarea  
+            #inputComment 
+            class="comment-input" 
+            type="text" 
+            placeholder="Write a comment..." 
+            [(ngModel)]="comment" 
+        >
+        </textarea>
+
+        <div fxLayout="row" *ngIf="commentEdit">
+            <div class="save-comment" (click)="onSaveComment()" [ngClass]="{'disabled': !comment}">
+              <span>Save</span>
+            </div>
+            <div class="close-btn-wrapper" fxLayoutAlign="center center" (click)="onCloseCommentEdit()">
+              <img class="close-btn" src="assets/close.svg" />
+            </div>
+        </div>
+    </div>
+    <!-- Not editing coment -->
+    <div class="comment-box" *ngIf="!commentEdit && !idCard">
+        {{ action?.data?.text }}
+    </div>
+    <div fxLayout="row" class="action-on-comment" *ngIf="!idCard">
+        <div class="action-label" (click)="onEditComment(action)">edit</div>
+        <div class="action-label dash">-</div>
+        <div class="action-label" (click)="onDeleteComment(action)">delete</div>
+    </div>
+</div>
