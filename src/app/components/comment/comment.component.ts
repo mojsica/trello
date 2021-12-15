@@ -9,7 +9,7 @@ import { ActionOnCard } from '../models/models';
 })
 export class CommentComponent implements AfterViewInit{
 
-  @Input() idCard: string; // Indicator that it is a new comment, so wee need idCard in order to save the new comment
+  @Input() idCard: string; // Indicator that it is a new comment, so wee need idCard in order to save the new comment.
   @Input() action: ActionOnCard;
   @Output() deleteAction = new EventEmitter<ActionOnCard>();
   @Output() addAction = new EventEmitter<ActionOnCard>();
