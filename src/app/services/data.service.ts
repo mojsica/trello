@@ -28,7 +28,6 @@ export class DataService {
           return board;
         }),
       );
-
   }
 
   public updateBoardName(board: Board) {

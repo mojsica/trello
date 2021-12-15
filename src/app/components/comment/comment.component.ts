@@ -14,6 +14,7 @@ export class CommentComponent implements AfterViewInit{
   @Output() deleteAction = new EventEmitter<ActionOnCard>();
   @Output() addAction = new EventEmitter<ActionOnCard>();
   @ViewChild('inputComment') inputComment: ElementRef;
+  
   commentEdit: boolean;
   comment: string;
 
