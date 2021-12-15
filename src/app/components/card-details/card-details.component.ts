@@ -22,11 +22,9 @@ export class CardDetailsComponent implements OnInit {
   ngOnInit(): void {
 
     this.dataService.getCard(this.data.id).subscribe((card: Card) => {
-      console.log('card', card);
       this.card = card;
     })
-    this.dataService.getActionsOnCard(this.data.id).subscribe((actionsOnCard: ActionOnCard[]) => {
-      console.log('actionsOnCard', actionsOnCard);
+    this.dataService.getCommentsOnCard(this.data.id).subscribe((actionsOnCard: ActionOnCard[]) => {
       this.actionsOnCard = actionsOnCard;
     })
   }

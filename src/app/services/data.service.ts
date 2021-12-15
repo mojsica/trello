@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { filter, map } from 'rxjs';
 import { ActionOnCard, Board, BoardCreate, Card, CardCreate, List, ListCreate } from '../components/models/models';
 
 @Injectable()
@@ -90,9 +90,12 @@ export class DataService {
     return this.http.delete<any>(url, this.options);
   }
 
-  public getActionsOnCard(id: string) {
+  public getCommentsOnCard(id: string) {
     const url = `https://api.trello.com/1/cards/${id}/actions/?key=${this.key}&token=${this.token}`;
-    return this.http.get<ActionOnCard[]>(url, this.options);
+    return this.http.get<ActionOnCard[]>(url, this.options)
+    .pipe(
+      map(actions => actions.filter(action => action.type === 'commentCard'))
+    );
   }
 
   public deleteCommentOnCard(action: ActionOnCard) {
