@@ -31,7 +31,7 @@ export class CardDetailsComponent implements OnInit {
 
   onChangeCardName() {
     if (this.card.name) {
-      this.dataService.updateCard(this.card).subscribe(res=>console.log(res));
+      this.dataService.updateCard(this.card).subscribe((card: Card) => {});
     } else {
       this.dataService.getCard(this.card.id).subscribe((card: Card) => { this.card.name = card.name; });
     }
