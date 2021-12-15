@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { AllBoardsDataService } from 'src/app/services/all-boards-data.service';
 import { SidenavService } from 'src/app/services/sidenav.service';
 import { DataService } from '../../services/data.service';
 import { Board } from '../models/models';
@@ -11,15 +12,22 @@ import { NewBoardFormComponent } from '../new-board-form/new-board-form.componen
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
 
-  allBoards$ = this.dataService.getAllBoards();
+  allBoards$ = this.allBoardsDataService.getAllBoards();
   constructor(
     private dataService: DataService,
     private router: Router,
     private sidenavService: SidenavService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private allBoardsDataService: AllBoardsDataService
   ) { }
+
+  ngOnInit() {
+    this.allBoardsDataService.bordsAreRefreshed.subscribe((res) => {
+      this.allBoards$ = this.allBoardsDataService.getAllBoards();
+    });
+  }
 
   goToDashboard() {
     this.router.navigate(['']);
@@ -31,7 +39,7 @@ export class SidebarComponent {
 
   onDeleteBoard(board: Board) {
     this.dataService.deleteBoard(board).subscribe(() => {
-      this.allBoards$ = this.dataService.getAllBoards(); // Refreash the boards
+      this.allBoardsDataService.refreshAllBoards();
       this.router.navigate(['']);
     });
   }
@@ -46,7 +54,8 @@ export class SidebarComponent {
 
     dialogRef.afterClosed().subscribe((board: Board) => {
       if (board) {
-        this.allBoards$ = this.dataService.getAllBoards(); // Refreash the boards
+        
+        this.allBoardsDataService.refreshAllBoards();
 
         // resulting board, after the creation, does not have a property "shortLink"
         let shortLink = '';

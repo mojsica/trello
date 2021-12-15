@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { NewBoardFormComponent } from './components/new-board-form/new-board-form.component';
 import { CardDetailsComponent } from './components/card-details/card-details.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { AllBoardsDataService } from './services/all-boards-data.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,8 @@ import { CommentComponent } from './components/comment/comment.component';
   providers: [
     DataService, 
     StyleService,
-    SidenavService
+    SidenavService,
+    AllBoardsDataService
   ],
   bootstrap: [AppComponent]
 })
