@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { filter, map } from 'rxjs';
+import { catchError, map, throwError } from 'rxjs';
 import { ActionOnCard, Board, BoardCreate, Card, CardCreate, List, ListCreate } from '../components/models/models';
 
 @Injectable()
@@ -27,6 +27,7 @@ export class DataService {
           });
           return board;
         }),
+        catchError(this.handleError)
       );
   }
 
@@ -82,7 +83,8 @@ export class DataService {
 
   public getCard(id: string) {
     const url = `https://api.trello.com/1/cards/${id}/?key=${this.key}&token=${this.token}`;
-    return this.http.get<Card>(url, this.options);
+    return this.http.get<Card>(url, this.options)
+    .pipe(catchError(this.handleError));
   }
 
   public archiveCard(id: string) {
@@ -94,7 +96,8 @@ export class DataService {
     const url = `https://api.trello.com/1/cards/${id}/actions/?key=${this.key}&token=${this.token}`;
     return this.http.get<ActionOnCard[]>(url, this.options)
     .pipe(
-      map(actions => actions.filter(action => action.type === 'commentCard'))
+      map(actions => actions.filter(action => action.type === 'commentCard')),
+      catchError(this.handleError)
     );
   }
 
@@ -111,5 +114,10 @@ export class DataService {
   public addCommentOnCard(idCard: string, text: string) {
     const url = `https://api.trello.com/1/cards/${idCard}/actions/comments?text=${text}&key=${this.key}&token=${this.token}`;
     return this.http.post<ActionOnCard>(url, this.options);
+  }
+
+  private handleError(err: HttpErrorResponse) {
+    let errorMessage = `error: ${err.error}`;
+    return throwError(errorMessage);
   }
 }
